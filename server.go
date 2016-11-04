@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"crypto/tls"
 	"fmt"
-	"golang.org/x/net/websocket"
 	"log"
 	"net"
 	"net/http"
@@ -17,13 +16,15 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"golang.org/x/net/websocket"
 )
 
 // ServerConfig is configuration for server objects.
 type ServerConfig struct {
 	StaticDir    string
-	Addr         string
-	Port         int
+	ReadTimeout  time.Duration
+	WriteTimeout time.Duration
 	CookieSecret string
 	RecoverPanic bool
 	Profiler     bool
@@ -162,7 +163,12 @@ func (s *Server) Run(addr string) {
 	s.Logger.Printf("web.go serving %s\n", l.Addr())
 
 	s.l = l
-	err = http.Serve(s.l, mux)
+	srv := http.Server{
+		ReadTimeout:  s.Config.ReadTimeout,
+		WriteTimeout: s.Config.WriteTimeout,
+		Handler:      mux,
+	}
+	err = srv.Serve(s.l)
 	s.l.Close()
 }
 
@@ -194,7 +200,12 @@ func (s *Server) RunTLS(addr string, config *tls.Config) error {
 	s.Logger.Printf("web.go serving %s\n", l.Addr())
 
 	s.l = l
-	return http.Serve(s.l, mux)
+	srv := http.Server{
+		ReadTimeout:  s.Config.ReadTimeout,
+		WriteTimeout: s.Config.WriteTimeout,
+		Handler:      mux,
+	}
+	return srv.Serve(s.l)
 }
 
 // Close stops server s.
