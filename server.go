@@ -17,18 +17,20 @@ import (
 	"strings"
 	"time"
 
+	"github.com/armon/go-proxyproto"
 	"golang.org/x/net/websocket"
 )
 
 // ServerConfig is configuration for server objects.
 type ServerConfig struct {
-	StaticDir    string
-	ReadTimeout  time.Duration
-	WriteTimeout time.Duration
-	CookieSecret string
-	RecoverPanic bool
-	Profiler     bool
-	ColorOutput  bool
+	StaticDir     string
+	ReadTimeout   time.Duration
+	WriteTimeout  time.Duration
+	CookieSecret  string
+	RecoverPanic  bool
+	Profiler      bool
+	ColorOutput   bool
+	ProxyProtocol bool
 }
 
 // Server represents a web.go server.
@@ -158,6 +160,11 @@ func (s *Server) Run(addr string) {
 	l, err := net.Listen("tcp", addr)
 	if err != nil {
 		log.Fatal("ListenAndServe:", err)
+	}
+
+	if s.Config.ProxyProtocol {
+		s.Logger.Printf("PROXY protocol enabled for incoming connections")
+		l = &proxyproto.Listener{Listener: l}
 	}
 
 	s.Logger.Printf("web.go serving %s\n", l.Addr())

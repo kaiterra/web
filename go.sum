@@ -1,0 +1,8 @@
+github.com/armon/go-proxyproto v0.0.0-20180202201750-5b7edb60ff5f h1:SaJ6yqg936TshyeFZqQE+N+9hYkIeL9AMr7S4voCl10=
+github.com/armon/go-proxyproto v0.0.0-20180202201750-5b7edb60ff5f/go.mod h1:QmP9hvJ91BbJmGVGSbutW19IC0Q9phDCLGaomwTJbgU=
+golang.org/x/crypto v0.0.0-20180315204335-b4956d363a8b h1:5SfqITiaCmOYPQLtqtu5wsKuhoYWSg5ONhgY0ejXdxk=
+golang.org/x/crypto v0.0.0-20180315204335-b4956d363a8b/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
+golang.org/x/net v0.0.0-20180314180242-e0c57d8f86c1 h1:bvdOgH8RHIWcCP5Scuwy/MvK15H8DM6SR1kyLdGfV/4=
+golang.org/x/net v0.0.0-20180314180242-e0c57d8f86c1/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
+golang.org/x/sys v0.0.0-20180315095008-cc7307a45468 h1:gA/WTjA7p666MDp8dc2JZcAaprujwHmc/1rj+E64iBA=
+golang.org/x/sys v0.0.0-20180315095008-cc7307a45468/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
